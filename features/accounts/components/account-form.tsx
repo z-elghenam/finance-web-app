@@ -13,6 +13,7 @@ import {
   FormItem,
   FormLabel,
 } from "@/components/ui/form";
+import { useCreateAccount } from "../api/use-create-account";
 
 const formSchema = accountInsertSchema.pick({
   name: true,
@@ -22,21 +23,25 @@ type FormValues = z.input<typeof formSchema>;
 
 type Props = {
   id?: string;
-  onSubmit: (values: FormValues) => void;
   onDelete?: () => void;
-  disabled?: boolean;
+  onClose: () => void;
 };
 
-export const AccountForm = ({ id, onSubmit, onDelete, disabled }: Props) => {
+export const AccountForm = ({ id, onDelete, onClose }: Props) => {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
     },
   });
+  const { mutate, isPending } = useCreateAccount();
 
   const handleSubmit = (values: FormValues) => {
-    onSubmit(values);
+    mutate(values, {
+      onSuccess: () => {
+        onClose();
+      },
+    });
   };
 
   const handleDelete = () => {
@@ -57,7 +62,7 @@ export const AccountForm = ({ id, onSubmit, onDelete, disabled }: Props) => {
               <FormLabel>Name</FormLabel>
               <FormControl>
                 <Input
-                  disabled={disabled}
+                  disabled={isPending}
                   placeholder="e.g. Cash, Bank, Credit Card"
                   {...field}
                 />
@@ -65,13 +70,13 @@ export const AccountForm = ({ id, onSubmit, onDelete, disabled }: Props) => {
             </FormItem>
           )}
         />
-        <Button className="w-full" disabled={disabled}>
+        <Button className="w-full" disabled={isPending}>
           {id ? "Save changes" : "Create account"}
         </Button>
         {!!id && (
           <Button
             type="button"
-            disabled={disabled}
+            disabled={isPending}
             onClick={handleDelete}
             className="w-full"
             variant="outline"
