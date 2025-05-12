@@ -1,11 +1,11 @@
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import { Trash } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-import { accountInsertSchema } from "@/db/schema";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { accountInsertSchema } from "@/db/schema";
 import {
   Form,
   FormControl,
@@ -13,7 +13,6 @@ import {
   FormItem,
   FormLabel,
 } from "@/components/ui/form";
-import { useCreateAccount } from "../api/use-create-account";
 
 const formSchema = accountInsertSchema.pick({
   name: true,
@@ -23,25 +22,26 @@ type FormValues = z.input<typeof formSchema>;
 
 type Props = {
   id?: string;
+  defaultValues?: FormValues;
+  onSubmit: (values: FormValues) => void;
   onDelete?: () => void;
-  onClose: () => void;
+  disabled?: boolean;
 };
 
-export const AccountForm = ({ id, onDelete, onClose }: Props) => {
+export const AccountForm = ({
+  id,
+  defaultValues,
+  onSubmit,
+  onDelete,
+  disabled,
+}: Props) => {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-    },
+    defaultValues: defaultValues,
   });
-  const { mutate, isPending } = useCreateAccount();
 
   const handleSubmit = (values: FormValues) => {
-    mutate(values, {
-      onSuccess: () => {
-        onClose();
-      },
-    });
+    onSubmit(values);
   };
 
   const handleDelete = () => {
@@ -52,7 +52,7 @@ export const AccountForm = ({ id, onDelete, onClose }: Props) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(handleSubmit)}
-        className="space-y-4 pt-4 px-4"
+        className="space-y-4 pt-4"
       >
         <FormField
           name="name"
@@ -62,7 +62,7 @@ export const AccountForm = ({ id, onDelete, onClose }: Props) => {
               <FormLabel>Name</FormLabel>
               <FormControl>
                 <Input
-                  disabled={isPending}
+                  disabled={disabled}
                   placeholder="e.g. Cash, Bank, Credit Card"
                   {...field}
                 />
@@ -70,13 +70,13 @@ export const AccountForm = ({ id, onDelete, onClose }: Props) => {
             </FormItem>
           )}
         />
-        <Button className="w-full" disabled={isPending}>
+        <Button className="w-full" disabled={disabled}>
           {id ? "Save changes" : "Create account"}
         </Button>
         {!!id && (
           <Button
             type="button"
-            disabled={isPending}
+            disabled={disabled}
             onClick={handleDelete}
             className="w-full"
             variant="outline"
