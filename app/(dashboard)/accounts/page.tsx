@@ -16,12 +16,12 @@ import { Skeleton } from "@/components/ui/skeleton";
 const AccountsPage = () => {
   const newAccount = useNewAccount();
   const deleteAccounts = useBulkDeleteAccounts();
-  const accountsQuery = useGetAccounts();
-  const accounts = accountsQuery.data || [];
+  const { data, isLoading } = useGetAccounts();
+  const accounts = data || [];
 
-  const isDisabled = accountsQuery.isLoading || deleteAccounts.isPending;
+  const isDisabled = isLoading || deleteAccounts.isPending;
 
-  if (accountsQuery.isLoading) {
+  if (isLoading) {
     return (
       <div className="max-w-screen-2xl mx-auto w-full pb-10 -mt-24">
         <Card className="border-none drop-shadow-sm">
