@@ -5,6 +5,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import QueryProvider from "@/providers/query-provider";
 import { NewAccountSheet } from "@/features/accounts/components/new-account-sheet";
 import { Toaster } from "@/components/ui/sonner";
+import { EditAccountSheet } from "@/features/accounts/components/edit-account-sheet";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,6 +35,7 @@ export default function RootLayout({
         >
           <QueryProvider>
             <NewAccountSheet />
+            <EditAccountSheet />
             <Toaster />
             {children}
           </QueryProvider>
