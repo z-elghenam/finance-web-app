@@ -8,6 +8,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { EditAccountSheet } from "@/features/accounts/components/edit-account-sheet";
 import { NewCategorySheet } from "@/features/categories/components/new-category-sheet";
 import { EditCategorySheet } from "@/features/categories/components/edit-category-sheet";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,6 +37,7 @@ export default function RootLayout({
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
           <QueryProvider>
+            <ReactQueryDevtools initialIsOpen={false} />
             <NewAccountSheet />
             <EditAccountSheet />
 
