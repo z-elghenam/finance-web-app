@@ -24,7 +24,6 @@ type FormValues = z.input<typeof formSchema>;
 
 export const NewAccountSheet = () => {
   const { isOpen, onClose } = useNewAccount();
-
   const mutation = useCreateAccount();
 
   const onSubmit = (values: FormValues) => {
@@ -37,7 +36,7 @@ export const NewAccountSheet = () => {
 
   return (
     <Sheet open={isOpen} onOpenChange={onClose}>
-      <SheetContent className="space-y-4">
+      <SheetContent className="space-y-4 px-2">
         <SheetHeader>
           <SheetTitle>New Account</SheetTitle>
           <SheetDescription>
