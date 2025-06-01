@@ -5,7 +5,14 @@ import { usePathname, useRouter } from "next/navigation";
 import { useMedia } from "react-use";
 
 import { NavButton } from "@/components/nav-button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 
@@ -56,8 +63,12 @@ export const Navigation = () => {
             <Menu className="size-4" />
           </Button>
         </SheetTrigger>
-        <SheetContent side="left" className="px-2">
-          <nav className="flex flex-col gap-y-2 pt-6">
+        <SheetContent side="left" className="px-2 w-full sm:max-w-sm">
+          <SheetHeader className="hidden">
+            <SheetTitle></SheetTitle>
+            <SheetDescription></SheetDescription>
+          </SheetHeader>
+          <nav className="flex flex-col gap-y-2 pt-12">
             {routes.map((route) => (
               <Button
                 key={route.href}
