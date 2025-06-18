@@ -9,7 +9,7 @@ import { and, desc, eq, gte, inArray, lte, sql } from "drizzle-orm";
 import { db } from "@/db/drizzle";
 import {
   transactions,
-  insertTransactionSchema,
+  transactionInsertSchema,
   categories,
   accounts,
 } from "@/db/schema";
@@ -117,7 +117,7 @@ const app = new Hono()
     clerkMiddleware(),
     zValidator(
       "json",
-      insertTransactionSchema.omit({
+      transactionInsertSchema.omit({
         id: true,
       })
     ),
@@ -146,7 +146,7 @@ const app = new Hono()
     zValidator(
       "json",
       z.array(
-        insertTransactionSchema.omit({
+        transactionInsertSchema.omit({
           id: true,
         })
       )
@@ -229,7 +229,7 @@ const app = new Hono()
     ),
     zValidator(
       "json",
-      insertTransactionSchema.omit({
+      transactionInsertSchema.omit({
         id: true,
       })
     ),
