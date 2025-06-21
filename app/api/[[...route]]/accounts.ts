@@ -25,13 +25,13 @@ const app = new Hono()
   })
   .get(
     "/:id",
+    clerkMiddleware(),
     zValidator(
       "param",
       z.object({
         id: z.string().optional(),
       })
     ),
-    clerkMiddleware(),
     async (c) => {
       const auth = getAuth(c);
       const { id } = c.req.valid("param");
