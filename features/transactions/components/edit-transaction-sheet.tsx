@@ -122,7 +122,7 @@ export const EditTransactionSheet = () => {
     <>
       <ConfirmDialog />
       <Sheet open={isOpen} onOpenChange={onClose}>
-        <SheetContent className="space-y-4">
+        <SheetContent className="space-y-4 px-4">
           <SheetHeader>
             <SheetTitle>Edit Transaction</SheetTitle>
             <SheetDescription>Edit an existing transaction</SheetDescription>

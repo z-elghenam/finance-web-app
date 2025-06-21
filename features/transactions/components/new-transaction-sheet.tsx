@@ -70,7 +70,7 @@ export const NewTransactionSheet = () => {
 
   return (
     <Sheet open={isOpen} onOpenChange={onClose}>
-      <SheetContent className="space-y-4 px-2 w-full">
+      <SheetContent className="space-y-4 px-4 w-full">
         <SheetHeader>
           <SheetTitle>New Transaction</SheetTitle>
           <SheetDescription>Add new Transaction.</SheetDescription>
