@@ -88,12 +88,13 @@ export function DataTable<TData, TValue>({
             variant="outline"
             className="ml-auto font-noraml text-xs"
             onClick={async () => {
+              // v2
               const ok = await confirm();
-
               if (ok) {
                 onDelete(table.getFilteredSelectedRowModel().rows);
                 table.resetRowSelection();
               }
+              // v1
               // onDelete(table.getFilteredSelectedRowModel().rows);
               // table.resetRowSelection();
             }}
