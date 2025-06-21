@@ -25,7 +25,7 @@ type Props = {
   defaultValues?: FormValues;
   onSubmit: (values: FormValues) => void;
   onDelete?: () => void;
-  disabled?: boolean;
+  disabled: boolean;
 };
 
 export const AccountForm = ({

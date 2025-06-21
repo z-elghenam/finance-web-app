@@ -38,7 +38,6 @@ export const EditAccountSheet = () => {
   const deleteMutation = useDeleteAccount(id);
 
   const isPending = editMutation.isPending || deleteMutation.isPending;
-
   const isLoading = accountQuery.isLoading;
 
   const onSubmit = (values: FormValues) => {
@@ -73,7 +72,7 @@ export const EditAccountSheet = () => {
     <>
       <ConfirmDialog />
       <Sheet open={isOpen} onOpenChange={onClose}>
-        <SheetContent className="space-y-4">
+        <SheetContent className="space-y-4 px-2">
           <SheetHeader>
             <SheetTitle>Edit Account</SheetTitle>
             <SheetDescription>Edit an existing account</SheetDescription>
