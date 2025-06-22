@@ -14,6 +14,7 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const formSchema = categoriesInsertSchema.pick({
   name: true,
 });

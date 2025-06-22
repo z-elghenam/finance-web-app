@@ -18,6 +18,7 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const formSchema = categoriesInsertSchema.pick({
   name: true,
 });
@@ -26,7 +27,6 @@ type FormValues = z.input<typeof formSchema>;
 
 export const EditCategorySheet = () => {
   const { isOpen, onClose, id } = useOpenCategory();
-
   const [ConfirmDialog, confirm] = useConfirm(
     "Are you sure?",
     "You are about to delete this category."
