@@ -11,7 +11,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
 type Props = {
@@ -45,10 +45,7 @@ export const Actions = ({ id }: Props) => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuItem
-            disabled={deleteMutation.isPending}
-            onClick={() => onOpen(id)}
-          >
+          <DropdownMenuItem onClick={() => onOpen(id)}>
             <Edit className="size-4 mr-2" />
             Edit
           </DropdownMenuItem>
